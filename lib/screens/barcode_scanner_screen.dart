@@ -84,10 +84,12 @@ class BarcodeScannerScreenState extends State<BarcodeScannerScreen> {
       //     await OpenFoodAPIClient.getProductV3(configuration);
 
       const ipAddress = '159.65.27.138';
+      // const ipAddress = '192.168.100.11';
       final url = 'http://$ipAddress:8000/food-recommendation?barcode=$barcodeResult&bmi=$userBmiStr';
       print("Fetching food information from: $url");
       final result = await http.get(Uri.parse(url));
-      print("Result: $result.body");
+      print("Result: $result");
+      print(jsonDecode(result.statusCode.toString()));
       if (result.statusCode == 200) {
         final response = jsonDecode(result.body);
         Navigator.push(
